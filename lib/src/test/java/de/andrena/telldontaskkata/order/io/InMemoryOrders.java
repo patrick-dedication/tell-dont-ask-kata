@@ -11,7 +11,7 @@ public class InMemoryOrders implements Orders {
 
     @Override
     public void save(Order order) {
-        findById(order.id()).ifPresent(orders::remove);
+        findById(order.getId()).ifPresent(orders::remove);
         this.orders.add(order);
     }
 
@@ -21,7 +21,7 @@ public class InMemoryOrders implements Orders {
     }
 
     private Optional<Order> findById(long orderId) {
-        return orders.stream().filter(order -> order.id() == orderId).findFirst();
+        return orders.stream().filter(order -> order.getId() == orderId).findFirst();
     }
 
     public List<Order> getOrders() {

@@ -31,7 +31,7 @@ class OrderApprovalUseCaseTest {
     void withRejectedOrderThrowsRejectedOrderCannotBeApprovedException() {
         Order order = createdOrder(1, OrderBuilder::withStatusRejected);
         orders.save(order);
-        var request = orderApprovalRequestForOrder(order.id());
+        var request = orderApprovalRequestForOrder(order.getId());
 
         assertThrows(RejectedOrderCannotBeApprovedException.class, () -> useCase.run(request));
     }
@@ -41,12 +41,12 @@ class OrderApprovalUseCaseTest {
     void approvesOrder() {
         Order savedOrder = createdOrder(1);
         orders.save(savedOrder);
-        var request = orderApprovalRequestForOrder(savedOrder.id());
+        var request = orderApprovalRequestForOrder(savedOrder.getId());
 
         useCase.run(request);
 
         assertThat(orders.getOrders()).satisfiesExactly(
-                order -> assertThat(order).hasId(savedOrder.id()).isApproved()
+                order -> assertThat(order).hasId(savedOrder.getId()).isApproved()
         );
     }
 

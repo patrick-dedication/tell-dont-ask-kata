@@ -16,7 +16,7 @@ public class OrderAssert extends AbstractObjectAssert<OrderAssert, Order> {
     public final OrderAssert hasId(long id) {
         isNotNull();
 
-        var actualId = actual.id();
+        var actualId = actual.getId();
         if (actualId != id) {
             failWithMessage("\nExpected id of:\n  <%s>\nto be:\n  <%s>\nbut was:\n  <%s>", actual, id, actualId);
         }
@@ -31,7 +31,7 @@ public class OrderAssert extends AbstractObjectAssert<OrderAssert, Order> {
     public final OrderAssert hasTax(BigDecimal tax) {
         isNotNull();
 
-        var actualTax = actual.tax();
+        var actualTax = actual.getTax();
         if (!Objects.equals(actualTax, tax)) {
             failWithMessage("\nExpected tax of:\n  <%s>\nto be:\n  <%s>\nbut was:\n  <%s>", actual, tax, actualTax);
         }
@@ -46,7 +46,7 @@ public class OrderAssert extends AbstractObjectAssert<OrderAssert, Order> {
     public final OrderAssert hasTotal(BigDecimal total) {
         isNotNull();
 
-        var actualTotal = actual.total();
+        var actualTotal = actual.getTotal();
         if (!Objects.equals(actualTotal, total)) {
             failWithMessage("\nExpected total of:\n  <%s>\nto be:\n  <%s>\nbut was:\n  <%s>", actual, total, actualTotal);
         }
@@ -58,7 +58,7 @@ public class OrderAssert extends AbstractObjectAssert<OrderAssert, Order> {
     public final OrderAssert hasItemsSatisfyingExactly(ThrowingConsumer<OrderItem>... itemRequirements) {
         isNotNull();
 
-        Assertions.assertThat(actual.items()).satisfiesExactly(itemRequirements);
+        Assertions.assertThat(actual.getItems()).satisfiesExactly(itemRequirements);
 
         return this;
     }
@@ -66,7 +66,7 @@ public class OrderAssert extends AbstractObjectAssert<OrderAssert, Order> {
     public final OrderAssert isApproved() {
         isNotNull();
 
-        var actualStatus = actual.status();
+        var actualStatus = actual.getStatus();
         if (!Objects.equals(actualStatus, OrderStatus.APPROVED)) {
             failWithMessage("\nExpected status of:\n  <%s>\nto be:\n  <%s>\nbut was:\n  <%s>", actual, OrderStatus.APPROVED, actualStatus);
         }
