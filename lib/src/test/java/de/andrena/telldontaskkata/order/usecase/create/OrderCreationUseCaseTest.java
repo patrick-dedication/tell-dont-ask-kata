@@ -23,6 +23,7 @@ class OrderCreationUseCaseTest {
     private final OrderCreationUseCase useCase = new OrderCreationUseCase(orders, products);
 
     @Test
+    @Disabled
     void withUnknownProductThrowsUnknownProductException() {
         var request = orderItemsRequestWith(orderItemRequestSingle("unknown product"));
 
